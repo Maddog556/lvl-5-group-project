@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import NavBar from "./Navbar";
 import "./Login.css"
 
 export default function Login(){
@@ -51,6 +52,8 @@ function handleRegistrationChange(event) {
     
 }
     return(
+        <>
+        <NavBar/>
         <div className="loginContainer">
             <div className="loginBox">
                 <h3 className="userName">{user.firstName}</h3>
@@ -64,5 +67,6 @@ function handleRegistrationChange(event) {
                 <h6 className='alreadyMember' onClick={toggleMembershipStatus}>{isMember? "Not": "Already"} a Member? click here</h6>
             </div>
         </div>
+        </>
     )
     }
