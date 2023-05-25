@@ -1,24 +1,25 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+import "./Login.css"
 
 export default function Login(){
-    const[loginData, setLoginData] = React.useState({
+    const[loginData, setLoginData] = useState({
         firstName: '',
         lastName:'',
         email:''
     })
 
-    const[isMember, setIsMember] = React.useState(false)
+    const[isMember, setIsMember] = useState(false)
 
     function toggleMembershipStatus(){
         setIsMember(prev=>!prev)
     }
 
-    const [user, setUser] = React.useState(() => {
+    const [user, setUser] = useState(() => {
         const storedUser = localStorage.getItem("user");
         return storedUser ? JSON.parse(storedUser) : {};
     });
     
-    React.useEffect(() => {
+    useEffect(() => {
         localStorage.setItem("user", JSON.stringify(user));
     }, [user]);
 
