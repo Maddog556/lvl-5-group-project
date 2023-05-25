@@ -12,7 +12,7 @@ return(
                 <Link className="Links" to="/" style={{ padding: 20 }}> 
                 Login
                 </Link> 
-                <Link className="Links" to="/AddLikes" style={{ padding: 20}}>
+                <Link className="Links" to="/AddLikesForm" style={{ padding: 20}}>
                 Add like Movies/Tvshows
                 </Link>
                 <Link className="Links"to="/SavedLikes" style={{ padding: 20 }}>

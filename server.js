@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 //connect mongoose
-mongoose.set('strictQuery', true)
+mongoose.set('strictQuery', false)
 mongoose.connect(process.env.MONGO_URL,()=>console.log('connected to mongodb database'))
 
 //routes
