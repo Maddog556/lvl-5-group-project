@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router,Routes,Route,Link } from 'react-router-dom'
 import Login from './components/Login'
-import AddLikes from './components/AddLikes'
+import AddLikes from './components/AddLikesForm'
 import SavedLikes from './components/SavedLikes'
 import './App.css'
 
