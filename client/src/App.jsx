@@ -1,11 +1,11 @@
-import React from 'react'
-import { BrowserRouter as Router,Routes,Route,Link } from 'react-router-dom'
+import { useState } from 'react'
 import Login from './components/Login'
 import AddLikes from './components/AddLikesForm'
 import SavedLikes from './components/SavedLikes'
 import './App.css'
 
-export default function App() {
+function App() {
+  const [count, setCount] = useState(0)
 
   return (
     <div className='App'>
