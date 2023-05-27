@@ -10,11 +10,13 @@ const likesSchema = new Schema({
     },
     type:{
         type: String,
-        required: true
+        required: true,
+        enum: ["movie",'tv-show']
     },
     genre: {
         type: String,
-        required: true
+        required: true,
+        enum: ['action','horror', 'comedy', 'fantasy']
     }
 })
 

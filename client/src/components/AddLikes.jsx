@@ -7,12 +7,12 @@ function likes() {
   const [LikesList,setLikesList] = useState([])
 
 
-//get all likes
-  function getLikes(){
-    axios.get('/api/Likes')
-      .then(res => setLikesList(res.data))
-      .catch(err => console.log(err.response.data.errMsg))
-  }
+// //get all likes
+//   function getLikes(){
+//     axios.get('/api/Likes')
+//       .then(res => setLikesList(res.data))
+//       .catch(err => console.log(err.response.data.errMsg))
+//   }
 // add new Likes
   function addLikes(newLikeAdded){
     axios.post('/api/likes',newLikeAdded)
@@ -78,7 +78,7 @@ function HandleFilter(e){
             editBounty={editLikes}    
         />)}  
 </div>
- 
- )}
+
+)}
 
 export default likes

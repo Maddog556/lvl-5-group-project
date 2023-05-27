@@ -13,12 +13,11 @@ return(
                 Login
                 </Link> 
                 <Link className="Links" to="/AddLikesForm" style={{ padding: 20}}>
-                Add like Movies/Tvshows
+                    liked Movies/Tvshows
                 </Link>
                 <Link className="Links"to="/SavedLikes" style={{ padding: 20 }}>
                 View Your Likes
                 </Link>
-          
     </nav>
 )
 } 
