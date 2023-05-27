@@ -19,7 +19,7 @@ likesRouter.get( "/",(req,res,next)=>{
 //get w/queries filter 
 
 likesRouter.get("/search/genre", (req,res,next)=> {
-    Likes.find({living: req.query.genre},(err,likedItem)=>{
+    Likes.find({genre: req.query.genre},(err,likedItem)=>{
         if(err){
             res.status(500)
             return next(err)
@@ -38,10 +38,25 @@ likesRouter.get("/search/type", (req,res,next)=> {
     })
 })
 
+//get movies by search term 
+likesRouter.get('/search', (req,res,next)=>{
+    const {title} = req.query//grabbing movie property 
+    const pattern = new RegExp(title)//need to turn movie into a regex to use below 
+    Likes.find({ title: { $regex: pattern, $options: 'i' } },//this i looking for an movie that matches anything in the provided string.
+    //"i" means case sensitivity doesnt matter
+    (err,movies)=>{
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+        return res.status(200).send(movies)
+    }) 
+})
+
 
 //post w/mongoDB
 likesRouter.post("/",(req,res,next)=>{
-    const newLike = new Bounty(req.body)
+    const newLike = new Likes(req.body)
     newLike.save((err,savedLike)=>{
         if(err){
             res.status(500)
