@@ -1,19 +1,18 @@
-import React from 'react'
 import { BrowserRouter as Router,Routes,Route,Link } from 'react-router-dom'
 import Login from './components/Login'
 import AddLikes from './components/AddLikesForm'
 import SavedLikes from './components/SavedLikes'
 import './App.css'
 
-export default function App() {
+function App() {
 
   return (
     <div className='App'>
- <Router>
+  <Router>
     <Routes>
     
       <Route path='/' index element={<Login />}/>
-      <Route path='/AddLikes' element={<AddLikes />}/>
+      <Route path='/AddLikesForm' element={<AddLikes />}/>
       <Route path='/SavedLikes' element={<SavedLikes />}/>
     
     </Routes>
@@ -22,3 +21,4 @@ export default function App() {
   )
 }
 
+export default App

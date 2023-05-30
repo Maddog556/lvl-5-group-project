@@ -1,55 +1,18 @@
 import React,{useState,useEffect} from "react";
 import NavBar from "./Navbar";
 import "./Login.css"
+import { LoginContext } from "./LoginProvider";
 
 export default function Login(){
-    const[loginData, setLoginData] = useState({
-        firstName: '',
-        lastName:'',
-        email:''
-    })
+//use context 
+const { user,
+    handleRegistration,
+    handleRegistrationChange,
+    loginData,
+    isMember,
+    logoutUser,
+    toggleMembershipStatus} =React.useContext(LoginContext)
 
-    const[isMember, setIsMember] = useState(false)
-
-    function toggleMembershipStatus(){
-        setIsMember(prev=>!prev)
-    }
-
-    const [user, setUser] = useState(() => {
-        const storedUser = localStorage.getItem("user");
-        return storedUser ? JSON.parse(storedUser) : {};
-    });
-    
-    useEffect(() => {
-        localStorage.setItem("user", JSON.stringify(user));
-    }, [user]);
-
-    //function to add items to a list 
-function handleRegistration (event){
-    event.preventDefault()
-    setUser({...user, ...loginData})
-    setLoginData({
-        firstName: '',
-        lastName:'',
-        email:''
-    });
-    }
-
-function logoutUser(){
-    localStorage.removeItem("user")
-}
-
-console.log('user', user)
-
-    //function that controls all input changes
-function handleRegistrationChange(event) {
-    const {name, value} = event.target//destructured object that targets the inputs name and values from the event.target object
-    setLoginData(prevData => ({
-        ...prevData,
-        [name]: value //name is the name of the objects
-    }))
-
-}
     return(
         <>
         <NavBar/>

@@ -2,14 +2,14 @@
 import React,{useState} from "react";
 import "./AddLikeForm.css"
 import NavBar from "./Navbar";
+import axios from 'axios'
 
 export default function AddLikes(props){
     
     const initInputs = {
-        title:props.title || '', 
-        type:props.type || ''  
+        title:props.title || ''
     }
-    
+    //input form state 
     const [inputs,setInputs] = useState(initInputs)
 
     function handleChange(e){
@@ -17,33 +17,85 @@ export default function AddLikes(props){
         setInputs(prevInputs =>({...prevInputs, [name]:value}))
     }
 // adds the Movie or tv show 
-    function handleSubmit(e){
-        e.preventDefault()
-        //post request
-        props.submit(inputs, props._id)
-        setInputs(initInputs)
+    function handleClick(e){
+        axios.get(`/api/likes/search?title=${e.target.value}`)
+        .then(res=>setLikesList(res.data))
+        .catch(err=>console.log(err))
+        setInputs(initInputs) 
     }
+console.log('inputs',inputs)
+
+    // state 
+    const [LikesList,setLikesList] = useState([])
+
+    //get all likes
+    function getLikes(){
+        axios.get('/api/likes')
+        .then(res => setLikesList(res.data))
+        .catch(err => console.log(err.response.data.errMsg))
+    }
+    
+
+    // filter
+function HandleFilterType(e){
+    if(e.target.value === 'reset'){
+        getLikes()
+    } else{
+    axios.get(`/api/likes/search/type?type=${e.target.value}`)
+    .then(res => setLikesList(res.data))
+    .catch(err => console.log(err))
+    }
+}
+
+function HandleFilterGenre(e){
+    if(e.target.value === 'reset'){
+        getLikes()
+    } else{
+    axios.get(`/api/likes/search/genre?genre=${e.target.value}`)
+    .then(res => setLikesList(res.data))
+    .catch(err => console.log(err))
+    }
+}
+
+const movieElements = LikesList.map(like=>(
+<div key={like._id}>
+    <h2>{like.title}</h2>
+    <h3>{like.type}</h3>
+    <h3>{like.genre}</h3>
+</div>
+))
 
     return(
         <>
         <NavBar />
-        <form  className="form"onSubmit={handleSubmit}>
+        <form  className="form" >
             <input 
             type='text' 
             name='title' 
-            value={inputs.name} 
+            value={inputs.title} 
             onChange={handleChange} 
             placeholder='Title'/>
-       
-            <select name="type" id="type" onChange={handleChange}>
-                <option>--Type--</option>
+
+            <button onClick={handleClick} type="button">{props.btnText} Get Movies</button>
+            <select name="type" id="type" onChange={HandleFilterType}>
+                <option>---Type---</option>
+                <option value='reset'>All Liked </option>
                 <option value="movie">Movie</option>
-                <option value="tvShow">Tv Show</option>
+                <option value="tv-show">Tv Show</option>
             </select>
 
-            <button>{props.btnText}</button>
+            <select name="genre" id="genre" onChange={HandleFilterGenre}>
+                <option>---Genre---</option>
+                <option value='reset'>All Liked </option>
+                <option value="action">Action</option>
+                <option value="horror">Horror</option>
+                <option value="comedy">Comedy</option>
+                <option value="fantasy">Fantasy</option>
+            </select>
 
         </form>
+
+        {movieElements}
         </>
     )
 }

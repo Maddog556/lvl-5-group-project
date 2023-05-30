@@ -3,54 +3,54 @@ import axios from 'axios'
 import AddLikes from './AddLikesForm'
 
 
-function Bounty() {
-  const [LikesList,setLiklesList] = useState([])
+function likes() {
+  const [LikesList,setLikesList] = useState([])
 
 
-//get all likes
-  function getLikes(){
-    axios.get('/Likes')
-      .then(res => setLikesList(res.data))
-      .catch(err => console.log(err.response.data.errMsg))
-  }
+// //get all likes
+//   function getLikes(){
+//     axios.get('/api/Likes')
+//       .then(res => setLikesList(res.data))
+//       .catch(err => console.log(err.response.data.errMsg))
+//   }
 // add new Likes
   function addLikes(newLikeAdded){
-    axios.post('/bountiesList',newLikeAdded)
+    axios.post('/api/likes',newLikeAdded)
     .then(res => {
-        setLikesList(prevbounties => [...prevbounties, res.data])
+        setLikesList(prevlikes => [...prevlikes, res.data])
     })
     .catch(err => console.log(err))
 }
 
 // delete function
-function deleteBounty(bountyId){
-axios.delete(`/bountiesList/${bountyId}`)
+function deleteLikes(likesId){
+axios.delete(`/api/likes/${likesId}`)
 .then(res => {
-    setBountiesList(prevbounties => prevbounties.filter(bounty => bounty._id !== bountyId))
+    setLikesList(prevlikes => prevlikes.filter(likes => likes._id !== likesId))
 })
 .catch(err => console.log(err))
 }
 
 // edit function
-function editBounty(updates,bountyId){
-    axios.put(`/bountiesList/${bountyId}`,updates)
+function editLikes(updates,likesId){
+    axios.put(`/api/likes/${likesId}`,updates)
     .then(res => {
-        setBountiesList(prevbounties => prevbounties.map(bounty => bounty._id !== bountyId ? bounty : res.data))
+        setLikesList(prevlikes => prevlikes.map(likes => likes._id !== likesId ? likes : res.data))
     })
     .catch(err => console.log(err))
 }
 // filter
 function HandleFilter(e){
   if(e.target.value === 'reset'){
-    getBounties()
+    getLIkes()
   } else{
-  axios.get(`/bountiesList/search/type?type=${e.target.value}`)
-  .then(res => setBountiesList(res.data))
+  axios.get(`/api/likes/search/type?type=${e.target.value}`)
+  .then(res => setLikesList(res.data))
   .catch(err => console.log(err))
   }
 }
   useEffect(() => {
-    getBounties()
+    getLikes()
   },[])
   
 
@@ -67,18 +67,18 @@ function HandleFilter(e){
 
     <AddLikes
         //here is for editing and add button on the form 
-        submit={addBounties}
+        submit={addLikes}
         btnText ='Add'
     />
-    {bountiesList.map(bounty => 
+    {bountiesList.map(likes => 
         <BountyFront 
-            {...bounty} 
-            key={bounty._id} 
-            deleteBounty={deleteBounty}
-            editBounty={editBounty}    
+            {...likes} 
+            key={likes._id} 
+            deleteBounty={deleteLikes}
+            editBounty={editLikes}    
         />)}  
 </div>
- 
- )}
 
-export default Bounty
+)}
+
+export default likes
