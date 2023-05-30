@@ -4,6 +4,12 @@ const Schema = mongoose.Schema
 //likes blueprint 
 
 const likesSchema = new Schema({
+    moviePoster:{
+        type:String,
+        require:true
+
+    },
+    
     title:{
         type: String,
         required: true
@@ -18,6 +24,7 @@ const likesSchema = new Schema({
         required: true,
         enum: ['action','horror', 'comedy', 'fantasy']
     }
+
 })
 
 module.exports = mongoose.model('Likes', likesSchema )

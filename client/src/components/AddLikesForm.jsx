@@ -7,7 +7,8 @@ import axios from 'axios'
 export default function AddLikes(props){
     
     const initInputs = {
-        title:props.title || ''
+        title:props.title || '',
+        moviePoster:props.moviePoster || ""
     }
     //input form state 
     const [inputs,setInputs] = useState(initInputs)
@@ -59,6 +60,7 @@ function HandleFilterGenre(e){
 
 const movieElements = LikesList.map(like=>(
 <div key={like._id}>
+    <img className="moviePoster" src={like.moviePoster}></img>
     <h2>{like.title}</h2>
     <h3>{like.type}</h3>
     <h3>{like.genre}</h3>
@@ -69,12 +71,21 @@ const movieElements = LikesList.map(like=>(
         <>
         <NavBar />
         <form  className="form" >
+        
+        <input 
+            type='text' 
+            name='moviePoster' 
+            value={inputs.moviePoster} 
+            onChange={handleChange} 
+            placeholder='Add Movie poster'/>
+            
             <input 
             type='text' 
             name='title' 
             value={inputs.title} 
             onChange={handleChange} 
             placeholder='Title'/>
+            
 
             <button onClick={handleClick} type="button">{props.btnText} Get Movies</button>
             <select name="type" id="type" onChange={HandleFilterType}>
