@@ -42,7 +42,7 @@ function editLikes(updates,likesId){
 // filter
 function HandleFilter(e){
   if(e.target.value === 'reset'){
-    getLIkes()
+    getLikes()
   } else{
   axios.get(`/api/likes/search/type?type=${e.target.value}`)
   .then(res => setLikesList(res.data))
@@ -67,8 +67,7 @@ function HandleFilter(e){
 
     <AddLikes
         //here is for editing and add button on the form 
-        submit={addLikes}
-        btnText ='Add'
+        submit={addLikes} 
     />
     {bountiesList.map(likes => 
         <BountyFront 
