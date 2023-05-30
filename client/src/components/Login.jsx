@@ -49,7 +49,6 @@ function handleRegistrationChange(event) {
         [name]: value //name is the name of the objects
     }))
 
-    
 }
     return(
         <>
