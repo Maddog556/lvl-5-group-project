@@ -2,13 +2,16 @@
 import React,{useState} from "react";
 import "./AddLikeForm.css"
 import NavBar from "./Navbar";
-import axios from 'axios'
 
-export default function AddLikes(props){
+
+export default function AddLikesform(props){
     
     const initInputs = {
-        title:props.title || '',
-        moviePoster:props.moviePoster || ""
+        moviePoster:props.moviePoster || "",
+        title:props.title || "",
+        type:props.type || "",
+        genre:props.genre || ""
+        
     }
     //input form state 
     const [inputs,setInputs] = useState(initInputs)
@@ -18,59 +21,18 @@ export default function AddLikes(props){
         setInputs(prevInputs =>({...prevInputs, [name]:value}))
     }
 // adds the Movie or tv show 
-    function handleClick(e){
-        axios.get(`/api/likes/search?title=${e.target.value}`)
-        .then(res=>setLikesList(res.data))
-        .catch(err=>console.log(err))
-        setInputs(initInputs) 
-    }
+function handleSubmit(e){
+    e.preventDefault()
+    //post request
+    props.submit(inputs, props._id)
+    setInputs(initInputs)
+}
 console.log('inputs',inputs)
-
-    // state 
-    const [LikesList,setLikesList] = useState([])
-
-    //get all likes
-    function getLikes(){
-        axios.get('/api/likes')
-        .then(res => setLikesList(res.data))
-        .catch(err => console.log(err.response.data.errMsg))
-    }
-    
-
-    // filter
-function HandleFilterType(e){
-    if(e.target.value === 'reset'){
-        getLikes()
-    } else{
-    axios.get(`/api/likes/search/type?type=${e.target.value}`)
-    .then(res => setLikesList(res.data))
-    .catch(err => console.log(err))
-    }
-}
-
-function HandleFilterGenre(e){
-    if(e.target.value === 'reset'){
-        getLikes()
-    } else{
-    axios.get(`/api/likes/search/genre?genre=${e.target.value}`)
-    .then(res => setLikesList(res.data))
-    .catch(err => console.log(err))
-    }
-}
-
-const movieElements = LikesList.map(like=>(
-<div key={like._id}>
-    <img className="moviePoster" src={like.moviePoster}></img>
-    <h2>{like.title}</h2>
-    <h3>{like.type}</h3>
-    <h3>{like.genre}</h3>
-</div>
-))
 
     return(
         <>
         <NavBar />
-        <form  className="form" >
+        <form  className="form"onSubmit={handleSubmit} >
         
         <input 
             type='text' 
@@ -86,27 +48,23 @@ const movieElements = LikesList.map(like=>(
             onChange={handleChange} 
             placeholder='Title'/>
             
-
-            <button onClick={handleClick} type="button">{props.btnText} Get Movies</button>
-            <select name="type" id="type" onChange={HandleFilterType}>
+            <select name="type" id="type" onChange={handleChange}>
                 <option>---Type---</option>
-                <option value='reset'>All Liked </option>
                 <option value="movie">Movie</option>
                 <option value="tv-show">Tv Show</option>
             </select>
 
-            <select name="genre" id="genre" onChange={HandleFilterGenre}>
+            <select name="genre" id="genre" onChange={handleChange}>
                 <option>---Genre---</option>
-                <option value='reset'>All Liked </option>
                 <option value="action">Action</option>
                 <option value="horror">Horror</option>
                 <option value="comedy">Comedy</option>
                 <option value="fantasy">Fantasy</option>
             </select>
 
-        </form>
+            <button> Add Like </button>
 
-        {movieElements}
+        </form>
         </>
     )
 }
