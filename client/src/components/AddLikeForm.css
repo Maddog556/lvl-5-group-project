@@ -2,7 +2,7 @@
 padding-top: 100px;
 
 }
-.moviePoster{
-    height: 300px;
-    width: 250px;
+
+.previewBox{
+    border: 1px solid black;
 }
