@@ -1,7 +1,7 @@
 
 import React,{useState} from "react";
 import "./AddLikeForm.css"
-import NavBar from "./Navbar";
+import NavBar from "./nav/Navbar";
 
 
 export default function AddLikesform(props){

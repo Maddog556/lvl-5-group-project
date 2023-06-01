@@ -1,7 +1,7 @@
 
 import React,{useState} from "react";
 import "./SavedLikes.css"
-import NavBar from "./Navbar";
+import NavBar from "./nav/Navbar";
 import AddLikesform from "./AddLikesForm";
 
 export default function SavedLikes(props){
