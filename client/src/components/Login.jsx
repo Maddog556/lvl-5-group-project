@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from "react";
-import NavBar from "./nav/Navbar";
 import "./Login.css"
 import { LoginContext } from "./LoginProvider";
 
@@ -15,8 +14,8 @@ const { user,
 
     return(
         <>
-        <NavBar/>
         <div className="loginContainer">
+            <div className="fade"></div>
             <div className="loginBox">
                 <h3 className="userName">{user.firstName}</h3>
                 <form onSubmit={handleRegistration} className="loginForm">
