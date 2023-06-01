@@ -25,7 +25,7 @@ body{
 ul{
     display: flex;
     justify-content: end;
-    height: 100px;
+    height: 140px;
     list-style: none;
 }
 
@@ -52,7 +52,9 @@ li{
         align-items: center;
         
     }
-
+    .Links{
+        padding: 0px;
+    }
     .hamburger{
         position: absolute;
         right: 5%;
