@@ -16,6 +16,18 @@ likesRouter.get( "/",(req,res,next)=>{
     })
 })
 
+//get one (params)
+likesRouter.get('/:likeId',(req,res,next)=>{
+    Likes.findById({_id: req.params.likeId},(err,item)=>{
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+        return res.status(200).send(item)
+    })
+})
+
+
 //get w/queries filter 
 
 likesRouter.get("/search/genre", (req,res,next)=> {

@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import NavBar from "./Navbar";
+import NavBar from "./nav/Navbar";
 import "./Login.css"
 import { LoginContext } from "./LoginProvider";
 
@@ -24,7 +24,7 @@ const { user,
                     <input className="loginInput" onChange={handleRegistrationChange} name="lastName" placeholder="Last Name" value={loginData.lastName} type="text"/>
                     <input className="loginInput" onChange={handleRegistrationChange} name="email" placeholder="Email" value={loginData.email} type="email"/>
                     <button className="loginButton">{isMember? "Login" : "Register"}</button>
-                    {user.firstName !== ''&& <button onClick={logoutUser} className="logoutButton">Logout</button>}
+                    {user.firstName !== '' && <button onClick={logoutUser} className="logoutButton">Logout</button>}
                 </form>
                 <h6 className='alreadyMember' onClick={toggleMembershipStatus}>{isMember? "Not": "Already"} a Member? click here</h6>
             </div>
