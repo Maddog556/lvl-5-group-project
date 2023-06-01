@@ -7,7 +7,6 @@ const likesSchema = new Schema({
     moviePoster:{
         type:String,
         require:true
-
     },
     
     title:{

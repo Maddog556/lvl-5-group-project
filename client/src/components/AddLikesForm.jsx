@@ -1,8 +1,6 @@
 
 import React,{useState} from "react";
 import "./AddLikeForm.css"
-import NavBar from "./nav/Navbar";
-
 
 export default function AddLikesform(props){
     
@@ -33,51 +31,52 @@ console.log('inputs',inputs)
 const defaultImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtRcLq69MMpy4uCtnR8azqxnIxOVlSqVlhSg&usqp=CAU"
 
     return(
-        <>
-        <NavBar />
-        <form  className="form"onSubmit={handleSubmit} >
+        <div className="Add-background-color">
+        <form  className="Add-form" onSubmit={handleSubmit} >
         
         <input 
+            className="Add-img-input"
             type='text' 
             name='moviePoster' 
             value={inputs.moviePoster} 
             onChange={handleChange} 
             placeholder='Add Movie poster (imgUrl)'/>
             
-            <input 
+            <input
+            className="Add-title-input"
             type='text' 
             name='title' 
             value={inputs.title} 
             onChange={handleChange} 
             placeholder='Title'/>
             
-            <select name="type" id="type" onChange={handleChange}>
+            <select className="Add-type-input" name="type" id="type" onChange={handleChange}>
                 <option>---Type---</option>
                 <option value={"movie"}>Movie</option>
                 <option value={"tv-show"}>Tv Show</option>
             </select>
 
-            <select name="genre" id="genre" onChange={handleChange}>
+            <select className="Add-genre-input" name="genre" id="genre" onChange={handleChange}>
                 <option>---Genre---</option>
                 <option value={"action"}>Action</option>
                 <option value={"horror"}>Horror</option>
                 <option value={"comedy"}>Comedy</option>
                 <option value={"fantasy"}>Fantasy</option>
             </select>
-            <button>{props.btnText}</button>
+            <button className="Add-btn">{props.btnText}</button>
 
             <div className="previewBox">
             {inputs.moviePoster === "" ? (
-            <img src={defaultImg} style={{ width: "250px", height: "275px" }} />
+            <img className="preview-img" src={defaultImg}/>
             ) : (
-            <img src={inputs.moviePoster} style={{ width: "250px", height: "275px" }} />
+            <img className="preview-img" src={inputs.moviePoster}/>
             )}
-                <h2>Title:{inputs.title}</h2>
-                <h2>Type:{inputs.type}</h2>
-                <h2>Genre:{inputs.genre}</h2>
+                <h2 className="preview-title">Title:{inputs.title}</h2>
+                <h2 className="preview-type">Type:{inputs.type}</h2>
+                <h2 className="preview-genre">Genre:{inputs.genre}</h2>
             </div>
 
         </form>
-        </>
+        </div>
     )
 }

@@ -5,6 +5,7 @@ import SavedLikes from './components/SavedLikes'
 import './App.css'
 import AddLikesform from './components/AddLikesForm'
 import axios from "axios"
+import NavBar from "./components/nav/Navbar"
 
 function App() {
   const [likesList , setLikesList] = React.useState([])
@@ -63,13 +64,14 @@ console.log('likesList', likesList)
   return (
     <div className='App'>
   <Router>
+    <NavBar/>
     <Routes>
     
       <Route path='/' index element={<Login />}/>
       <Route path='/AddLikesForm' element={<AddLikesform 
       submit = {addLike} 
       likesList={likesList}  
-      btnText = "Add to Likes"
+      btnText = "ADD TO LIKES"
       deleteLikes= {deleteLikes}
       />}
       />

@@ -9,7 +9,7 @@ export default function NavLinks(){
             <Link className="Links" to="/" > Login</Link> 
         </li>
         <li>
-            <Link className="Links" to="/AddLikesForm">liked Movies/Tvshows</Link>
+            <Link className="Links" to="/AddLikesForm"> Add liked Movies/Tvshows</Link>
         </li>
         <li>
             <Link className="Links"to="/SavedLikes" >View Your Likes</Link>
