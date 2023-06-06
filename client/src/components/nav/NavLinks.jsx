@@ -6,13 +6,16 @@ export default function NavLinks(){
     return(
     <ul>
         <li>
-            <Link className="Links" to="/" > Login</Link> 
+            <Link className="Links" to="/" > Home</Link> 
         </li>
         <li>
             <Link className="Links" to="/AddLikesForm"> Add liked Movies/Tvshows</Link>
         </li>
         <li>
             <Link className="Links"to="/SavedLikes" >View Your Likes</Link>
+        </li>
+        <li>
+            <Link className="Links" to="/login" > Login</Link> 
         </li>
     </ul>
     )
