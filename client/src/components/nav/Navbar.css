@@ -30,14 +30,23 @@ ul{
 }
 
 li{
-    margin-top: 30px;
     padding: 5px;
 }
 
-
-
 .mobileNav{
     display: none;
+}
+
+.title{
+    position: relative;
+    top: 35%;
+    left: 5%;
+    font-size: 25px;
+    width: 100px;
+}
+
+span{
+    color: #d00621;
 }
 
 @media (max-width: 990px){
@@ -53,7 +62,7 @@ li{
         
     }
     .Links{
-        padding: 0px;
+        padding: 2px;
     }
     .hamburger{
         position: absolute;
@@ -75,7 +84,7 @@ li{
         position: absolute;
         top:10%;
         width: 100%;
-        background-color: #F3F3F4;
+        background-color: #f3f3f4e5;
         list-style: none;
     }
 

@@ -40,7 +40,9 @@ const defaultImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtRcLq
             name='moviePoster' 
             value={inputs.moviePoster} 
             onChange={handleChange} 
-            placeholder='Add Movie poster (imgUrl)'/>
+            placeholder='Add Movie poster (imgUrl)'
+            required
+            />
             
             <input
             className="Add-title-input"
@@ -48,16 +50,18 @@ const defaultImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtRcLq
             name='title' 
             value={inputs.title} 
             onChange={handleChange} 
-            placeholder='Title'/>
+            placeholder='Title'
+            required
+            />
             
-            <select className="Add-type-input" name="type" id="type" onChange={handleChange}>
-                <option>---Type---</option>
+            <select className="Add-type-input" name="type" id="type" onChange={handleChange} required >
+                <option value={''}>---Type---</option>
                 <option value={"movie"}>Movie</option>
                 <option value={"tv-show"}>Tv Show</option>
             </select>
 
-            <select className="Add-genre-input" name="genre" id="genre" onChange={handleChange}>
-                <option>---Genre---</option>
+            <select className="Add-genre-input" name="genre" id="genre" onChange={handleChange} required >
+                <option value={''}>---Genre---</option>
                 <option value={"action"}>Action</option>
                 <option value={"horror"}>Horror</option>
                 <option value={"comedy"}>Comedy</option>
@@ -75,8 +79,11 @@ const defaultImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtRcLq
                 <h2 className="preview-type">Type:{inputs.type}</h2>
                 <h2 className="preview-genre">Genre:{inputs.genre}</h2>
             </div>
-
         </form>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         </div>
     )
 }

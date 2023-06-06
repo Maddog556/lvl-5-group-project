@@ -6,6 +6,7 @@ import './App.css'
 import AddLikesform from './components/AddLikesForm'
 import axios from "axios"
 import NavBar from "./components/nav/Navbar"
+import Home from "./components/Home"
 
 function App() {
   const [likesList , setLikesList] = React.useState([])
@@ -67,7 +68,11 @@ console.log('likesList', likesList)
     <NavBar/>
     <Routes>
     
-      <Route path='/' index element={<Login />}/>
+      <Route path='/' index element={<Home 
+      likesList={likesList}
+      />}
+      />
+      <Route path="/login" element={<Login/>}/>
       <Route path='/AddLikesForm' element={<AddLikesform 
       submit = {addLike} 
       likesList={likesList}  
