@@ -69,3 +69,10 @@ p{
     line-height: 4;
 }
 }
+
+@media(max-width: 573px){
+    .welcome{
+        font-size: 20px;
+        line-height: 4;
+    }
+    }

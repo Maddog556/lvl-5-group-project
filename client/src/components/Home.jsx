@@ -14,16 +14,15 @@ const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
 
 React.useEffect(() => {
     const interval = setInterval(() => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % likesList.length);
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % likesList.length);//increments prev index by 1 and uses % to ensure the index wraps around to 0 when it reaches the end of the likesList array.
     }, 3000); // Change image every 3 seconds
-    return () => clearInterval(interval);
+    return () => clearInterval(interval);//clean up function
     }, []);
 
 const carouselElements = likesList.map((item,index)=>(
 <div key={index}>
 <img 
     src={item.moviePoster}
-    // alt={`Image ${index + 1}`}
     className={index === currentImageIndex ? 'active' : ''}
     />
 </div>
