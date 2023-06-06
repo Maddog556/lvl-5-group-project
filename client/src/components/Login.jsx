@@ -10,7 +10,7 @@ const { user,
     loginData,
     isMember,
     logoutUser,
-    toggleMembershipStatus} =React.useContext(LoginContext)
+    toggleMembershipStatus} = React.useContext(LoginContext)
 
     return(
         <>
