@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 const likesSchema = new Schema({
     moviePoster:{
         type:String,
-        require:true
+        required:true
     },
     
     title:{

@@ -67,7 +67,7 @@ const defaultImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtRcLq
                 <option value={"comedy"}>Comedy</option>
                 <option value={"fantasy"}>Fantasy</option>
             </select>
-            <button className="Add-btn">{props.btnText}</button>
+            <button className="Add-btn">'Add Likes'</button>
 
             <div className="previewBox">
             {inputs.moviePoster === "" ? (
@@ -80,10 +80,7 @@ const defaultImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtRcLq
                 <h2 className="preview-genre">Genre:{inputs.genre}</h2>
             </div>
         </form>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+       
         </div>
     )
 }
