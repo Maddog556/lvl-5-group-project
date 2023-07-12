@@ -1,8 +1,7 @@
 import React from "react";
-import { BrowserRouter as Router,Routes,Route,Link } from 'react-router-dom'
 import './Navbar.css'
-import MobileNav from "./MobileNav";
-import Navigation from "./Navigation";
+
+import NavLinks from "./NavLinks";
 
 
 function NavBar() {
@@ -10,8 +9,8 @@ function NavBar() {
 return(
     <div className="navbar">
         <h3 className="title">Liked<span>Flix</span></h3>
-        <Navigation/>
-        <MobileNav/>
+        <NavLinks/>
+        
     </div>
 
 )

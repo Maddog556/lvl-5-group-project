@@ -1,6 +1,7 @@
 
-import React,{useState} from "react";
+import React,{useContext, useState} from "react";
 import "./AddLikeForm.css"
+import { UserContext } from "./context/UserProvider";
 
 export default function AddLikesform(props){
     
@@ -13,6 +14,8 @@ const initInputs = {
 }
 //input form state 
 const [inputs,setInputs] = useState(initInputs)
+const {addLike} = useContext(UserContext)
+// const {moviePoster,title,type,genre} = props
 
 //makes all input changes controlled by react 
 function handleChange(e){
@@ -23,7 +26,8 @@ function handleChange(e){
  //submit 
 function handleSubmit(e){
     e.preventDefault()
-    props.submit(inputs, props._id)//inputs is the new movie object state and props._id is coming from the likelist prop
+    addLike(inputs)
+    // inputs.submit(inputs, props._id)//inputs is the new movie object state and props._id is coming from the likelist prop
     setInputs(initInputs)
 }
 console.log('inputs',inputs)
@@ -67,7 +71,7 @@ const defaultImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtRcLq
                 <option value={"comedy"}>Comedy</option>
                 <option value={"fantasy"}>Fantasy</option>
             </select>
-            <button className="Add-btn">{props.btnText}</button>
+            <button type='submit' className="Add-btn">'Add Likes'</button>
 
             <div className="previewBox">
             {inputs.moviePoster === "" ? (
@@ -80,10 +84,7 @@ const defaultImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtRcLq
                 <h2 className="preview-genre">Genre:{inputs.genre}</h2>
             </div>
         </form>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+       
         </div>
     )
 }

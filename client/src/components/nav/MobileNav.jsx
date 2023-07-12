@@ -18,8 +18,6 @@ const closeIcon = <AiOutlineCloseCircle
             size="40px" 
             color="red"
             onClick={()=>setOpen(!open)} />
-
-
     return(
         <nav className="mobileNav">
             {open? closeIcon : hamburgerIcon}

@@ -1,43 +1,26 @@
-import React from "react";
+import React from 'react'
 import './Home.css'
 
 
-
-
-export default function Home(props){
-const {likesList} = props
-console.log('likelist.movie', likesList)
-
-const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
-
-
-
-React.useEffect(() => {
-    const interval = setInterval(() => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % likesList.length);//increments prev index by 1 and uses % to ensure the index wraps around to 0 when it reaches the end of the likesList array.
-    }, 3000); // Change image every 3 seconds
-    return () => clearInterval(interval);//clean up function
-    }, []);
-
-const carouselElements = likesList.map((item,index)=>(
-<div key={index}>
-<img 
-    src={item.moviePoster}
-    className={index === currentImageIndex ? 'active' : ''}
-    />
-</div>
-))
-    return(
-        <div className="container">
-            <div className="carousel">
-                {carouselElements}
-            </div>
-            <h2 className="welcome">Welcome to Liked<span>Flix</span></h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Debitis ducimus sunt sint eveniet incidunt fuga tempore voluptas
-            officiis molestiae ullam asperiores vitae minima, error atque, 
-            voluptatibus ex ea suscipit perspiciatis.
-            </p>
-        </div>
-    )
+function Home() {
+    
+  return (
+    <div>
+        <h1 className='header'>Liked<p className='red'>Flix</p> is a app to keep track of all of your favorite Movies and Tv shows.</h1>
+        <h3 className='body'><p className='why'>Why I made the APP?</p> 
+        <p className='line-2'> Movies and TV shows are extraordinary forms of entertainment that captivate and inspire audiences around the world.</p>
+        <p className='body-1'>They have the power to transport us to different worlds, evoke a range of emotions, and offer thought-provoking narratives. 
+        From heartwarming stories that touch our souls to thrilling adventures that keep us on the edge of our seats, there is something 
+        for everyone in the vast realm of visual storytelling.
+        The creativity and craftsmanship displayed by filmmakers, actors, writers, 
+        and directors never cease to amaze me.</p>
+        <p className='body-2'> Whether it's exploring diverse genres, witnessing incredible performances, or engaging in complex narratives, the world of movies 
+        and TV shows provides endless opportunities for entertainment, enlightenment, and pure enjoyment.So this app is for keeping up 
+        with all movies becuase the are so many amzing stories.</p>
+        <p className='closing'> We hope that this app becomes usefully 
+        for you and Thank you for using us.</p></h3>
+    </div>
+  )
 }
+
+export default Home
