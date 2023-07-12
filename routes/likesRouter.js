@@ -2,11 +2,10 @@ const express = require('express')
 const likesRouter = express.Router()
 const Likes = require('../models/likes.js')
 
-
 //route//
 
 //get all
-likesRouter.get( "/",(req,res,next)=>{  
+likesRouter.get("/",(req,res,next)=>{  
     Likes.find((err,likes)=>{
         if(err){
             res.status(500)
@@ -27,44 +26,6 @@ likesRouter.get("/user",(req,res,next) =>{
     })
 })
 
-//get w/queries filter 
-
-// likesRouter.get("/search/genre", (req,res,next)=> {
-//     Likes.find({genre: req.query.genre},(err,likedItem)=>{
-//         if(err){
-//             res.status(500)
-//             return next(err)
-//         }
-//         return res.status(200).send(likedItem)
-//     })
-// })
-
-// likesRouter.get("/search/type", (req,res,next)=> {
-//     Likes.find({type: req.query.type},(err,likedItem)=>{
-//         if(err){
-//             res.status(500)
-//             return next(err)
-//         }
-//         return res.status(200).send(likedItem)
-//     })
-// })
-
-// //get movies by search term 
-// likesRouter.get('/search', (req,res,next)=>{
-//     const {title} = req.query//grabbing movie property 
-//     const pattern = new RegExp(title)//need to turn movie into a regex to use below  regex is for password and email
-//     Likes.find({ title: { $regex: pattern, $options: 'i' } },//this i looking for an movie that matches anything in the provided string.
-//     //"i" means case sensitivity doesnt matter
-//     (err,movies)=>{
-//         if(err){
-//             res.status(500)
-//             return next(err)
-//         }
-//         return res.status(200).send(movies)
-//     }) 
-// })
-
-
 //post w/mongoDB add one 
 likesRouter.post("/",(req,res,next)=>{
     req.body.user = req.auth._id
@@ -79,8 +40,9 @@ likesRouter.post("/",(req,res,next)=>{
 })
 
 //delete
-likesRouter.delete("/:likeId", (req,res,next)=>{
-    Likes.findOneAndDelete({_id: req.params.likeId,user:req.auth._id},(err,deletedLike)=>{
+likesRouter.delete("/:likesId", (req,res,next)=>{
+    Likes.findByIdAndDelete({_id: req.params.likesId},
+        (err,deletedLike)=>{
         if(err){
             res.status(500)
             return next(err)
@@ -89,20 +51,30 @@ likesRouter.delete("/:likeId", (req,res,next)=>{
     })
 })
 
-//put(edit)
-likesRouter.put("/:likeId", (req,res,next)=>{
-    Likes.findOneAndUpdate(
-        {_id: req.params.likeId,user:req.auth._id},// find this one to update user:req.auth._id is to make sure only the user can do updates and deletes with 
-        req.body,//update the object with this data
-        {new:true},// send back the updated version please
-        (err,updatedLike)=>{
-            if(err){
-                res.status(500)
-                return next(err)
-            }
-            return res.status(201).send(updatedLike)
+likesRouter.get('/:likesId',(req,res,next)=>{
+    Likes.findOne({_id: req.params.likesId},(err,Likes) => {
+        if(err){
+            res.status(500)
+            return next(err)
         }
-    )
+        return res.status(200).send(Likes)
+    })
 })
+
+// //put(edit)
+// likesRouter.put("/:likeId", (req,res,next)=>{
+//     Likes.findOneAndUpdate(
+//         {_id: req.params.likeId,user:req.auth._id},// find this one to update user:req.auth._id is to make sure only the user can do updates and deletes with 
+//         req.body,//update the object with this data
+//         {new:true},// send back the updated version please
+//         (err,updatedLike)=>{
+//             if(err){
+//                 res.status(500)
+//                 return next(err)
+//             }
+//             return res.status(201).send(updatedLike)
+//         }
+//     )
+// })
 
 module.exports = likesRouter

@@ -22,6 +22,12 @@ const likesSchema = new Schema({
         type: String,
         required: true,
         enum: ['action','horror', 'comedy', 'fantasy']
+    },
+    // have to give a object id to map thur
+    user:{
+        type:Schema.Types.ObjectId,
+        ref:"User",
+        required:true
     }
 
 })

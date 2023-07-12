@@ -1,5 +1,6 @@
 import React, {useState,useContext} from 'react'
 import AuthForm from "./AuthForm.jsx"
+import './Auth.css'
 import {UserContext} from '../context/UserProvider'
 
 const initInputs = {username:"" , password:""}
@@ -38,7 +39,7 @@ export default function Auth(){
 
     return(
         <div className= "auth-container">
-            <h1>Add like App</h1>
+            <h1 className='login-title'>Add Likes</h1>
             {!toggle ?
             <>
           <AuthForm
@@ -49,7 +50,7 @@ export default function Auth(){
             btnText="Sign Up"
             errMsg={errMsg}
           />
-          <p onClick={toggleForm}>Already A Member?</p>
+          <p className='toggleform' onClick={toggleForm}>Already A Member?</p>
         </> :
         <>
           <AuthForm
@@ -60,7 +61,7 @@ export default function Auth(){
             btnText="Login"
             errMsg={errMsg}
           />
-          <p onClick={toggleForm}>Not a member?</p>
+          <p className='toggleform' onClick={toggleForm}>Not a member?</p>
         </>}
     </div>
     )

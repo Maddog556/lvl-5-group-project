@@ -1,21 +1,19 @@
-import React from 'react'
-import { BrowserRouter as Router,Routes,Route,Link } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import { UserContext } from '../context/UserProvider'
 
 
-export default function NavLinks(props){
-    const { token, logout } = props
+export default function NavLinks(){
+    const { token, logout } = useContext(UserContext)
     return(
-    <ul>
-        <li>
-            <Link className="Links" to="/" > Login</Link> 
-        </li>
-        <li>
-            <Link className="Links" to="/AddLikesForm"> Add liked Movies/Tvshows</Link>
-        </li>
-        <li>
-            <Link className="Links"to="/SavedLikes" >View Your Likes</Link>
-        </li>
-        {token ? <button onClick={logout}>Logout</button> : <button disabled onClick={logout}>Logout</button>}
-    </ul>
+    <nav>
+            <Link className="Links" to="/" > Home </Link> 
+      
+            <Link className="Links" to="/addLikesForm"> Add like Movies/Tvshows</Link>
+        
+            <Link className="Links"to="/savedLikes" >Saved Likes</Link>
+       
+         {token ? <button className='logout-btn' onClick={logout}>Logout</button> : <button disabled onClick={logout}>Logout</button>}
+    </nav>
     )
 }

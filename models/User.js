@@ -21,6 +21,7 @@ const userSchema = new Schema({
         type: Boolean,
         default:false
     },
+    
 })
 // PRE-SAVED HOOK TO ENCRYPT USER PASSWORD ON SIGNUP 
 userSchema.pre('save', function (next) {

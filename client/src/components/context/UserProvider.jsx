@@ -12,29 +12,32 @@ userAxios.interceptors.request.use(config => {
   return config
 })
 
-const initState = {
-  user: JSON.parse(localStorage.getItem("user")) || {},
-  token: localStorage.getItem('token') || "",
-  likes: [],
-  errMsg: ""
-}
-
 export default function UserProvider(props) {
-
-  const [userState, setUserState] = useState(initState)
-  const [userErr, setUserErr] = useState("")
-  const [likesList , setLikesList] = useState([])
   
-  function getAllLikes(){
-    axios.get('/api/Likes')
-    .then(res => setLikesList(res.data))
-    .catch(err => console.log(err.response.data.errMsg))
+  const initState = {
+    user: JSON.parse(localStorage.getItem("user")) || {},
+    token: localStorage.getItem('token') || "",
+    likesList:[],
+    errMsg: ""
+  }
+  
+  const [userState, setUserState] = useState(initState)
+  
+  // console.log(userState)
+
+
+  function getUserLikes(){
+    userAxios.get('/api/likes/user')
+    .then(res => {
+      setUserState(prevUserState => ({
+        ...prevUserState,
+        likesList: res.data
+      }))
+    }
+    )
+    .catch(err => console.log(err.response))
   }
 
-  //store get data to state on first render
-  useEffect(() => {
-   getAllLikes()
-  },[])
 
   function signup(credentials) {
     axios.post("/auth/signup", credentials)
@@ -42,7 +45,7 @@ export default function UserProvider(props) {
         const { user, token } = res.data
         localStorage.setItem('token', token)
         localStorage.setItem('user', JSON.stringify(user))
-        getAllLikes()
+        getUserLikes()
         setUserState(prevUserState => ({
           ...prevUserState,
           user,
@@ -58,7 +61,6 @@ export default function UserProvider(props) {
         const { user, token } = res.data
         localStorage.setItem("token", token)
         localStorage.setItem("user", JSON.stringify(user))
-        getAllLikes()
         getUserLikes()
         setUserState(prevUserState => ({
           ...prevUserState,
@@ -67,6 +69,7 @@ export default function UserProvider(props) {
         }))
       })
       .catch(err => handleAuthErr(err.response.data.errMsg))
+      console.log('Im logged in')
   }
 
   function logout() {
@@ -75,8 +78,9 @@ export default function UserProvider(props) {
     setUserState({
       user: {},
       token: "",
-      likes: []
+      likesList:[]
     })
+    console.log('Im logged out')
   }
 
   function handleAuthErr(errMsg) {
@@ -93,38 +97,29 @@ export default function UserProvider(props) {
     }))
   }
 
-  function getUserLikes() {
-    userAxios.get("/api/likes/user")
-      .then(res => {
-        setUserState(prevUserState => ({
-          ...prevUserState,
-          issues: res.data
-        }))
-      })
-      .catch(err => console.log(err))
-  }
-
   function addLike(newLike) {
     userAxios.post("/api/likes", newLike)
       .then(res => {
         setUserState(prevUserState => ({
           ...prevUserState,
-          likes: [...prevUserState.likes, res.data]
+          likesList: [prevUserState.likesList, res.data]
         }))
-        getAllLikes()
-        getUserLikes()
       })
-      .catch(err => console.log(err.response.data.errMsg))
+      .catch(err => console.log(err.response))
   }
 
   function deleteLike(likeId) {
-    userAxios.delete(`/api/like/${likeId}`)
-    .then(res => {
-      setLikesList(prev => prev.filter(like => like._id !== likeId))
-    })
-    .catch(err => console.log(err))  
+    userAxios.delete(`/api/likes/${likeId}`)
+      .then(res => {
+        setUserState(prev => ({
+         ...prev,
+         LikesList: prev.likesList.filter( likes => likes._id !== likeId)
+        }));
+        getUserLikes()
+      })
+      .catch(err => console.log(err));
   }
-
+    
   return (
     <UserContext.Provider
       value={{
@@ -135,7 +130,9 @@ export default function UserProvider(props) {
         addLike,
         deleteLike,
         resetAuthErr,
-        setUserErr,
+        getUserLikes
+        
+       
       }}>
       {props.children}
     </UserContext.Provider>

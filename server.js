@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGO_URL,()=>console.log('connected to mongodb dat
 //routes
 app.use('/auth', require('./routes/authRouter.js'))
 app.use("/api", expressjwt({secret: process.env.SECRET, algorithms: ['HS256']}))
-// express-jwt is a npm package it is a gate keep it checks for token
+// express-jwt is a npm package it is a gate keeper it checks for token
 app.use('/api/likes', require('./routes/likesRouter.js'))
 
 

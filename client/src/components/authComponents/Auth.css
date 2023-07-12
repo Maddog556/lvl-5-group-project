@@ -1,0 +1,27 @@
+.auth-container{
+    height: 980px;
+    display: grid;
+    background-image: linear-gradient(180deg,transparent,rgb(116 83 83 / 61%),#cdcdcd);
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(4,1fr);
+    justify-items: center;
+}
+.login-title{
+    font-weight: 800;
+    font-size: 60px;
+    color:brown;
+    margin-top: 150px;
+    grid-column: 2;
+    grid-row: 1;
+}
+.authForm{
+    grid-column: 2;
+    grid-row: 2;
+}
+.toggleform{
+    grid-column: 2;
+    grid-row: 3;
+}
+.toggleform:hover{
+    cursor: pointer;
+}
